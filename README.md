@@ -1,5 +1,11 @@
 # AI Medical ChatBot
 
+<div align="center">
+  <img src="images/medical-chatbot-banner.png" alt="AI Medical ChatBot Banner" width="800"/>
+  <br>
+  <em>A sophisticated medical chatbot powered by advanced AI technologies</em>
+</div>
+
 A sophisticated medical chatbot powered by advanced AI technologies, designed to provide accurate and helpful medical information based on a comprehensive medical knowledge base.
 
 ## 🚀 Features
