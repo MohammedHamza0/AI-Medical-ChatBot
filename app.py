@@ -24,7 +24,7 @@ embeddings = download_hugginface_embedding()
 # Load the existing index from Pinecone
 index_name = "medicalbot"
 docsearch = PineconeVectorStore.from_existing_index(index_name=index_name, embedding=embeddings)
-retriever = docsearch.as_retriever(search_type="similarity", search_kwargs={"k": 3})
+retriever = docsearch.as_retriever(search_type="similarity", search_kwargs={"k": 10})
 
 # Initialize the LLM
 llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", google_api_key=GEMINI_API_KEY)
