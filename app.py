@@ -29,11 +29,13 @@ retriever = docsearch.as_retriever(search_type="similarity", search_kwargs={"k":
 # Initialize the LLM
 llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", google_api_key=GEMINI_API_KEY)
 system_prompt = (
-    "You are an assistant for a question-answering task. "
-    "Use the following pieces of retrieved context to answer "
-    "the question. If you don't know the answer, say that you don't know. "
-    "Use four sentences maximum and keep the answer concise.\n\n{context}"
+    "You are a knowledgeable assistant tasked with answering questions based on the full provided context. "
+    "Analyze all the information before generating a response. "
+    "Do not rely on individual sentences in isolation—synthesize information across the entire context. "
+    "If the answer cannot be determined from the context, respond with 'I don't know.' "
+    "Your answer should be clear, accurate.\n\n{context}"
 )
+
 prompt = ChatPromptTemplate.from_messages([("system", system_prompt), ("human", "{input}")])
 question_answer_chain = create_stuff_documents_chain(llm=llm, prompt=prompt)
 rag_chain = create_retrieval_chain(retriever, question_answer_chain)
@@ -41,7 +43,28 @@ rag_chain = create_retrieval_chain(retriever, question_answer_chain)
 # Streamlit frontend
 def main():
     st.set_page_config(page_title="Medical Bot", page_icon="💬")
-    
+
+    # Sidebar with bot and developer info
+    with st.sidebar:
+        st.image("https://cdn-icons-png.flaticon.com/512/3774/3774299.png", width=100)
+        st.title("🤖 Medical Bot Info")
+
+        st.markdown("""
+        **Model Description:**  
+        This assistant uses advanced RAG techniques combining **gemini-2.0-flash** and **Pinecone** vector search.  
+        It provides reliable, grounded answers sourced from *The Gale Encyclopedia of Medicine (3rd Edition)*.
+
+        **Developer:**  
+        **Mohammed Hamza Khalifa**  
+        AI Engineer | Passionate about machine learning, NLP, and real-world AI solutions.
+
+        [🔗 Connect on LinkedIn](https://www.linkedin.com/in/mohammed-hamza-4184b2251/)
+
+        ---
+
+        © 2025 Mohammed Khalifa
+        """)
+
     # Custom CSS styling
     st.markdown("""
         <style>
@@ -144,6 +167,7 @@ def main():
 
     # Auto scroll
     st.markdown('<script>window.scrollTo(0, document.body.scrollHeight);</script>', unsafe_allow_html=True)
+
 
 if __name__ == "__main__":
     main()
