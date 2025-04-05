@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Chatbot</title>
+    <link rel="templates" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .chat-container {
+            width: 350px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+        }
+        .chat-body {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+        }
+        .chat-footer {
+            display: flex;
+            border-top: 1px solid #ddd;
+        }
+        .chat-footer input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            outline: none;
+        }
+        .chat-footer button {
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+        .chat-footer button:hover {
+            background-color: #0056b3;
+        }
+        .message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        .bot-message {
+            background-color: #e9ecef;
+            align-self: flex-start;
+        }
+        .user-message {
+            background-color: #007bff;
+            color: #fff;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h3>Chatbot</h3>
+        </div>
+        <div class="chat-body" id="chat-body">
+            <div class="message bot-message">Hello! How can I assist you today?</div>
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="user-input" placeholder="Type a message..." autocomplete="off">
+            <button id="send-btn">Send</button>
+        </div>
+    </div>
+    <script>
+        document.getElementById('send-btn').addEventListener('click', function() {
+            sendMessage();
+        });
+
+        document.getElementById('user-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        function sendMessage() {
+            const userInput = document.getElementById('user-input');
+            const chatBody = document.getElementById('chat-body');
+            const message = userInput.value.trim();
+
+            if (message === '') return;
+
+            // Append user message
+            const userMessageElement = document.createElement('div');
+            userMessageElement.classList.add('message', 'user-message');
+            userMessageElement.textContent = message;
+            chatBody.appendChild(userMessageElement);
+
+            // Scroll to the bottom
+            chatBody.scrollTop = chatBody.scrollHeight;
+
+            // Clear input
+            userInput.value = '';
+
+            // Simulate bot response
+            setTimeout(() => {
+                const botMessageElement = document.createElement('div');
+                botMessageElement.classList.add('message', 'bot-message');
+                botMessageElement.textContent = getBotResponse(message);
+                chatBody.appendChild(botMessageElement);
+
+                // Scroll to the bottom
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }, 1000);
+        }
+
+        function getBotResponse(input) {
+            // Simple predefined responses
+            const responses = {
+                'hello': 'Hi there! How can I help you?',
+                'how are you': 'I\'m just a bot, but I\'m doing fine. How can I assist you?',
+                'bye': 'Goodbye! Have a great day!',
+                'default': 'I\'m not sure I understand. Can you please rephrase?'
+            };
+
+            // Normalize input to lowercase
+            const normalizedInput = input.toLowerCase();
+
+            // Return response if found, else default response
+            return responses[normalizedInput] || responses['default'];
+        }
+    </script>
+</body>
+</html>
