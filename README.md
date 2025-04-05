@@ -1,7 +1,7 @@
 # AI Medical ChatBot
 
 <div align="center">
-  <img src="images/medical-chatbot-banner.png" alt="AI Medical ChatBot Banner" width="800"/>
+  <img src="images/medicalbot1.png" alt="AI Medical ChatBot Banner" width="800"/>
   <br>
   <em>A sophisticated medical chatbot powered by advanced AI technologies</em>
 </div>
