@@ -1,12 +1,10 @@
 # Core libraries
 sentence-transformers==2.2.2
 langchain==0.1.14
-flask==2.2.5
 pypdf==3.17.0
 python-dotenv==1.0.1
 
 # Pinecone and LangChain integrations
-pinecone-client[grpc]==3.0.0
 langchain-pinecone==0.0.3
 langchain-community==0.0.30
 google-generativeai==0.3.2
