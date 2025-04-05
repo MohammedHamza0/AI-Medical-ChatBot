@@ -29,7 +29,7 @@ A sophisticated medical chatbot powered by advanced AI technologies, designed to
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/AI-Medical-ChatBot.git
+git clone https://github.com/MohammedHamza0/AI-Medical-ChatBot.git
 cd AI-Medical-ChatBot
 ```
 
