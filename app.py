@@ -2,7 +2,7 @@ import streamlit as st
 from src.helper import download_hugginface_embedding
 from langchain_pinecone import PineconeVectorStore
 import google.generativeai as genai
-from langchain_community.chat_models import ChatGoogleGenerativeAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.prompts import ChatPromptTemplate
